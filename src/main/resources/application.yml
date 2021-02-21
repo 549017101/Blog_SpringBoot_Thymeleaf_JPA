@@ -1,0 +1,10 @@
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  thymeleaf:
+    cache: false  #关闭thymeleaf缓存
+  devtools:
+    restart:
+      enabled: true  #开启热部署
