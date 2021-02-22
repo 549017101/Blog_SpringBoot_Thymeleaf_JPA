@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!--
+  author pxz
+  email buffll@foxmail.com
+-->
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta name="Author" content="pxz" />
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>首页</title>
+    <link rel="shortcut icon" th:href="@{/img/favicon.ico}" />
+    <link th:href="@{https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/me.css}">
+  </head>
+
+  <body>
+
+    <!--导航-->
+    <div class="myNav"></div>
+
+
+    <!--中间内容-->
+    <div class="m-container m-padded-tb-big">
+      <div class="ui container">
+        <div class="ui stackable grid">
+
+          <!--左边博客列表-->
+          <div class="eleven wide column">
+
+            <!------------header----------->
+            <div class="ui top attached segment">
+              <div class="ui middle aligned two column grid">
+                <div class="column">
+                  <h3 class="ui teal header">博客</h3>
+                </div>
+                <div class="right aligned column">
+                  共 <h2 class="ui orange header m-inline-block m-text-thin"> 14 </h2> 篇
+                </div>
+              </div>
+            </div>
+            <!------------------------------->
+
+            <!------------content------------>
+            <div class="ui attached segment">
+
+              <div class="ui padded vertical segment m-padded-tb-large">
+                <div class="ui mobile reversed stackable grid">
+                  <div class="eleven wide column">
+                    <h3 class="ui header">你真的理解什么是财富自由吗？</h3>
+                    <br>
+                    <p class="m-text">
+                      正确做好任何一件事情的前提是清晰、正确的理解目标。
+                      而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，只是大家都那么做而已..
+                    </p>
+                    <div class="ui grid">
+                      <div class="eleven wide column">
+                        <div class="ui mini horizontal link list">
+                          <div class="item">
+                            <img th:src="@{/img/my.png}" alt="" class="ui avatar image">
+                            <div class="content">
+                              <a href="#" class="header">pxz</a>
+                            </div>
+                          </div>
+                          <div class="item">
+                            <i class="calendar icon"></i>
+                            2021-02-20
+                          </div>
+                          <div class="item">
+                            <i class="eye icon"></i>
+                            2342
+                          </div>
+                        </div>
+                      </div>
+                      <div class="right aligned five wide column">
+                        <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin">认知升级</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="five wide column">
+                    <a href="#">
+                      <img th:src="@{/img/my.png}" alt="" class="ui rounded image">
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+
+            <!--上一页与下一页-->
+            <div class="pageUpDown"></div>
+            
+          </div>
+
+          <!--右边的top-->
+          <div class="five wide column">
+
+            <!--分类-->
+            <div class="ui segments">
+              <div class="ui secondary segment">
+                <div class="ui two column grid">
+                  <div class="column">
+                    <i class="file alternate icon"></i>
+                    分类
+                  </div>
+                  <div class="right aligned column">
+                    <a href="#" target="_blank">more <i class="angle double right icon"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="ui teal segment">
+                <div class="ui fluid vertical menu">
+                  <a href="#" class="item">
+                    学习日志
+                    <div class="ui teal basic left pointing label">13</div>
+                  </a>
+                  <a href="#" class="item">
+                    思考与感悟
+                    <div class="ui teal basic left pointing label">13</div>
+                  </a>
+                  <a href="#" class="item">
+                    学习日志
+                    <div class="ui teal basic left pointing label">13</div>
+                  </a>
+                  <a href="#" class="item">
+                    学习日志
+                    <div class="ui teal basic left pointing label">13</div>
+                  </a>
+                  <a href="#" class="item">
+                    学习日志
+                    <div class="ui teal basic left pointing label">13</div>
+                  </a>
+                  <a href="#" class="item">
+                    学习日志
+                    <div class="ui teal basic left pointing label">13</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!--标签-->
+            <div class="ui segments m-margin-top-large">
+              <div class="ui secondary segment">
+                <div class="ui two column grid">
+                  <div class="column">
+                    <i class="tags icon"></i>
+                    标签
+                  </div>
+                  <div class="right aligned column">
+                    <a href="#" target="_blank">more <i class="angle double right icon"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="ui teal segment">
+                <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny">
+                  测试测试
+                  <div class="detail">23</div>
+                </a>
+                <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny">
+                  测试测试测试
+                  <div class="detail">23</div>
+                </a>
+                <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny">
+                  方法论
+                  <div class="detail">23</div>
+                </a>
+                <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny">
+                  测试
+                  <div class="detail">23</div>
+                </a>
+                <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny">
+                  方法论
+                  <div class="detail">23</div>
+                </a>
+                <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny">
+                  测试测试测试
+                  <div class="detail">23</div>
+                </a>
+                <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny">
+                  方法论
+                  <div class="detail">23</div>
+                </a>
+                <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny">
+                  方法论
+                  <div class="detail">23</div>
+                </a>
+              </div>
+            </div>
+
+            <!--最新推荐-->
+            <div class="ui segments m-margin-top-large">
+              <div class="ui secondary segment ">
+                <i class="bookmark icon"></i>
+                最新推荐
+              </div>
+              <div class="ui segment">
+                <a href="#" target="_blank" class="m-black m-text-thin">用户故事（User Story）</a>
+              </div>
+              <div class="ui segment">
+                <a href="#" target="_blank" class="m-black m-text-thin">用户故事（User Story）</a>
+              </div>
+              <div class="ui segment">
+                <a href="#" target="_blank" class="m-black m-text-thin">用户故事（User Story）</a>
+              </div>
+              <div class="ui segment">
+                <a href="#" target="_blank" class="m-black m-text-thin">用户故事（User Story）</a>
+              </div>
+              <div class="ui segment">
+                <a href="#" target="_blank" class="m-black m-text-thin">用户故事（User Story）</a>
+              </div>
+              
+            </div>
+
+            <!-- 底部线 -->
+            <hr class="ui divider m-margin-top-large">
+          </div>
+          <!------------------------------->
+
+        </div>
+      </div>
+    </div>
+    <br>
+    
+    <!--底部footer-->
+    <div class="myFooter"></div>
+
+    <!--semantic-ui 也需要依赖jquery-->
+    <script th:src="@{https://cdn.bootcdn.net/ajax/libs/jquery/3.2.0/jquery.min.js}"></script>
+    <script th:src="@{https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.js}"></script>
+    <script th:src="@{/js/commons.js}"></script>
+
+    <script>
+      $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+      });
+    </script>
+  </body>
+
+</html>
