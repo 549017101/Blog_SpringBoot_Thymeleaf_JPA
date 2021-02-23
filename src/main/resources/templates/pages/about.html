@@ -5,20 +5,13 @@
 -->
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
-  <head>
-    <meta name="Author" content="pxz" />
-    <meta http-equiv="content-type" content="text/html" charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <head th:replace="/commons/fragments :: head(~{::title})">
     <title>关于我</title>
-    <link rel="shortcut icon" th:href="@{../img/favicon.ico}" />
-    <link th:href="@{https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{../css/me.css}">
   </head>
 
   <body>
-
     <!--导航-->
-    <div class="myNav"></div>
+    <div th:replace="/commons/fragments :: navigation(5)"></div>
 
     <!--中间内容-->
     <div class="m-container m-padded-tb-big">
@@ -26,7 +19,7 @@
         <div class="ui stackable grid">
           <div class="eleven wide column">
             <div class="ui segment">
-              <img th:src="@{../img/my.png}" alt="" class="ui rounded image" style="height: 500px;">
+              <img th:src="@{/img/my.png}" alt="" class="ui rounded image" style="height: 500px;">
             </div>
           </div>
 
@@ -36,7 +29,7 @@
             </div>
 
             <div class="ui attached segment">
-              <p class="m-text">pxz，一个独立开发者，折腾在 0 和 1 世界的大叔；一个终身学习者，誓将学习无限循环. 希望结识可以共同成长的小伙伴.</p>
+              <p class="m-text">pxz，一个独立开发者，折腾在 0 和 1 世界的人；一个终身学习者，誓将学习无限循环. 希望结识可以共同成长的小伙伴.</p>
               <p class="m-text">热爱编程，喜欢折腾，正在探索高效学习编程技术的方法...</p>
             </div>
 
@@ -78,13 +71,13 @@
 
             <!--悬浮的微信二维码-->
             <div class="ui wechat-qr flowing popup transition hidden">
-              <img th:src="@{../img/vx.png}" alt="" class="ui rounded image" style="width: 150px">
+              <img th:src="@{/img/vx.png}" alt="" class="ui rounded image" style="width: 150px">
             </div>
 
             <!--悬浮的QQ二维码-->
             <div class="ui qq-qr flowing popup transition hidden">
               <p style="text-align: center;">QQ: 767722843</p>
-              <img th:src="@{../img/qq.png}" alt="" class="ui rounded image" style="width: 150px">
+              <img th:src="@{/img/qq.png}" alt="" class="ui rounded image" style="width: 150px">
             </div>
 
             <!--悬浮的邮箱信息-->
@@ -103,11 +96,10 @@
     </div>
 
     <!--底部footer-->
-    <div class="myFooter"></div>
+    <div th:replace="/commons/fragments :: footer"></div>
 
-    <script th:src="@{https://cdn.bootcdn.net/ajax/libs/jquery/3.2.0/jquery.min.js}"></script>
-    <script th:src="@{https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.js}"></script>
-    <script th:src="@{../js/commons.js}"></script>
+    <!--公共的js引用-->
+    <div th:replace="/commons/fragments :: script"></div>
 
     <script>
       $('.menu.toggle').click(function () {

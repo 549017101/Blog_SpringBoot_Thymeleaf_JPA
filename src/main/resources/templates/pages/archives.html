@@ -5,20 +5,13 @@
 -->
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
-  <head>
-    <meta name="Author" content="pxz" />
-    <meta http-equiv="content-type" content="text/html" charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <head th:replace="/commons/fragments :: head(~{::title})">
     <title>归档</title>
-    <link rel="shortcut icon" th:href="@{../img/favicon.ico}" />
-    <link th:href="@{https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{../css/me.css}">
   </head>
 
   <body>
-
-    <!--导航-->
-    <div class="myNav"></div>
+  <!--导航-->
+  <div th:replace="/commons/fragments :: navigation(4)"></div>
 
     <!--中间内容-->
     <div class="m-container-small m-padded-tb-big">
@@ -111,12 +104,12 @@
 
     <br>
     <br>
+    
     <!--底部footer-->
-    <div class="myFooter"></div>
-
-    <script th:src="@{https://cdn.bootcdn.net/ajax/libs/jquery/3.2.0/jquery.min.js}"></script>
-    <script th:src="@{https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.js}"></script>
-    <script th:src="@{../js/commons.js}"></script>
+    <div th:replace="/commons/fragments :: footer"></div>
+  
+    <!--公共的js引用-->
+    <div th:replace="/commons/fragments :: script"></div>
 
     <script>
       $('.menu.toggle').click(function () {

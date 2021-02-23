@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+  Author: pxz
+  Email: buffll@foxmail.com
+  2021-02-23 13:28
+-->
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta name="Author" content="pxz" /> 
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <style type="text/css"></style>
+    <script type="text/javascript"></script>
+    <title>Error</title>
+  </head>
+  
+  <body>
+		<h1>错误页面</h1>
+    
+    <div>
+      <!--这个div中的内容用来显示异常信息,但不会输出在页面上,而是在网页源代码中可以看到,这样就不需要去服务器上查看日志了-->
+      <div th:utext="'&lt;!--'" th:remove="tag"></div>
+      <div th:utext="'Failed Request URL : ' + ${url}" th:remove="tag"></div>
+      <div th:utext="'Exception message : ' + ${exception.message}" th:remove="tag"></div>
+      <ul th:remove="tag">
+        <li th:each="st : ${exception.stackTrace}" th:remove="tag">
+          <span th:utext="${st}" th:remove="tag"></span>
+        </li>
+      </ul>
+      <div th:utext="'--&gt;'" th:remove="tag"></div>
+    </div>
+  </body>
+</html>

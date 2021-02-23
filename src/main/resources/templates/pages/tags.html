@@ -5,20 +5,13 @@
 -->
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
-  <head>
-    <meta name="Author" content="pxz" />
-    <meta http-equiv="content-type" content="text/html" charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <head th:replace="/commons/fragments :: head(~{::title})">
     <title>标签</title>
-    <link rel="shortcut icon" th:href="@{../img/favicon.ico}" />
-    <link th:href="@{https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{../css/me.css}">
   </head>
 
   <body>
-
     <!--导航-->
-    <div class="myNav"></div>
+    <div th:replace="/commons/fragments :: navigation(3)"></div>
 
     <!--中间内容-->
     <div class="m-container-small m-padded-tb-big">
@@ -91,7 +84,7 @@
                     <div class="eleven wide column">
                       <div class="ui mini horizontal link list">
                         <div class="item">
-                          <img th:src="@{../img/my.png}" alt="" class="ui avatar image">
+                          <img th:src="@{/img/my.png}" alt="" class="ui avatar image">
                           <div class="content"><a href="#" class="header">pxz</a></div>
                         </div>
                         <div class="item">
@@ -121,7 +114,7 @@
 
               <div class="five wide column">
                 <a href="#" target="_blank">
-                  <img th:src="@{../img/my.png}" alt="" class="ui rounded image" style="height: 150px; width: 200px;">
+                  <img th:src="@{/img/my.png}" alt="" class="ui rounded image" style="height: 150px; width: 200px;">
                 </a>
               </div>
             </div>
@@ -129,25 +122,23 @@
         </div>
 
         <!--上一页与下一页-->
-        <div class="pageUpDown"></div>
-
+        <div th:replace="/commons/fragments :: pageUpDown"></div>
       </div>
     </div>
     <br>
+    <br>
 
     <!--底部footer-->
-    <div class="myFooter"></div>
+    <div th:replace="/commons/fragments :: footer"></div>
 
-    <script th:src="@{https://cdn.bootcdn.net/ajax/libs/jquery/3.2.0/jquery.min.js}"></script>
-    <script th:src="@{https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.js}"></script>
-    <script th:src="@{../js/commons.js}"></script>
+    <!--公共的js引用-->
+    <div th:replace="/commons/fragments :: script"></div>
 
     <script type="text/javascript">
       $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
       });
-
-
+      
       //点击状态 默认为false
       //let barFlag = false;
 
@@ -182,8 +173,7 @@
         }
         //console.log(barFlag);
       }
-
-
+      
       //点击按钮改变状态 方式二: 点击事件
         // function changeBg(data) {
         //   for (let i = 0; i < barName.length; i++) {
@@ -191,7 +181,6 @@
         //   }
         //   data.className = "ui teal basic left pointing large label m-margin-tb-tiny"
         // }
-
     </script>
   </body>
 
