@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
  */
 public interface TypeService {
 	/**
-	 * 新增分类
+	 * 保存分类
 	 * @param type
 	 * @return
 	 */
@@ -40,7 +40,7 @@ public interface TypeService {
 	Type updateType(Long id, Type type);
 	
 	/**
-	 * 根据主键删除分类
+	 * 根据id删除分类
 	 * @param id
 	 */
 	void deleteType(Long id);

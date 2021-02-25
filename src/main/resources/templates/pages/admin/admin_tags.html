@@ -6,64 +6,60 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
   <head th:replace="/commons/fragments :: head(~{::title})">
-    <title>分类</title>
+    <title>标签管理</title>
   </head>
-
   <body>
-    <!--导航-->
-    <div th:replace="/commons/admin_fragments :: navigation(2)"></div>
+    <div th:replace="/commons/admin_fragments :: navigation(3)"></div>
     <div class="ui attached pointing menu">
       <div class="ui container">
         <div class="right menu">
-          <a th:href="@{/admin/types/input}" class="item">新增</a>
-          <a th:href="@{/admin/types}" class="teal active item">列表</a>
+          <a th:href="@{/admin/tags/input}" class="item">新增</a>
+          <a th:href="@{/admin/tags}" class="teal active item">列表</a>
         </div>
       </div>
     </div>
-
+  
     <!--中间内容-->
-    <div class="m-container-small m-padded-tb-big">
+    <div  class="m-container-small m-padded-tb-big">
       <div class="ui container">
         <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
           <i class="close icon"></i>
           <div class="header">提示：</div>
           <p th:text="${message}"></p>
         </div>
-
+        
         <table class="ui celled table" style="text-align: center;">
           <thead>
             <tr>
               <th>编号</th>
-              <th>类别名称</th>
+              <th>标签名称</th>
               <th>操作</th>
             </tr>
           </thead>
           <tbody>
-            <tr th:each="type,iterStat : ${admin_types_page.content}">
+            <tr th:each="tag,iterStat : ${admin_tags_page.content}">
               <td th:text="${iterStat.count}"></td>
-              <td th:text="${type.name}"></td>
+              <td th:text="${tag.name}"></td>
               <td>
-                <a th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini teal basic button">编辑</a>
-                <a th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui mini red basic button">删除</a>
+                <a th:href="@{/admin/tags/{id}/input(id=${tag.id})}" class="ui mini teal basic button">编辑</a>
+                <a th:href="@{/admin/tags/{id}/delete(id=${tag.id})}" class="ui mini red basic button">删除</a>
               </td>
             </tr>
           </tbody>
           <tfoot>
             <tr>
               <th colspan="6" style="text-align: left">
-                <div class="ui pagination menu" th:if="${admin_types_page.totalPages} > 1">
-                  <a th:href="@{/admin/types(page=${admin_types_page.number}-1)}"
-                     th:unless="${admin_types_page.first}"
-                     class="item">
+                <div class="ui pagination menu" th:if="${admin_tags_page.totalPages} > 1">
+                  <a th:href="@{/admin/tags(page=${admin_tags_page.number}-1)}"
+                     class="item" th:unless="${admin_tags_page.first}">
                     上一页
                   </a>
-                  <a th:href="@{/admin/types(page=${admin_types_page.number}+1)}"
-                     th:unless="${admin_types_page.last}"
-                     class="item">
+                  <a th:href="@{/admin/tags(page=${admin_tags_page.number}+1)}"
+                     class="item" th:unless="${admin_tags_page.last}">
                     下一页
                   </a>
                 </div>
-                <a th:href="@{/admin/types/input}" class="ui primary right floated teal basic button">新增</a>
+                <a th:href="@{/admin/tags/input}" class="ui primary right floated teal basic button">新增</a>
               </th>
             </tr>
           </tfoot>
@@ -72,24 +68,24 @@
     </div>
     <br>
     <br>
-    
+  
     <div th:replace="/commons/admin_fragments :: footer"></div>
+    
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
     <script>
       $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
       })
-
+  
       $('.ui.dropdown').dropdown({
-        on: 'hover'
+        on : 'hover'
       })
-
+  
       //消息提示关闭初始化
       $('.message .close').on('click', function () {
         $(this).closest('.message').transition('fade')
       })
     </script>
   </body>
-
 </html>
