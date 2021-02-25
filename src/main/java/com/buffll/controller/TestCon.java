@@ -47,7 +47,7 @@ public class TestCon {
 	
 	@GetMapping("/blogs-input")
 	public String index7() {
-		return "pages/admin/blogs-input";
+		return "pages/admin/blogs_input";
 	}
 	
 	@GetMapping("/login11")
@@ -58,5 +58,15 @@ public class TestCon {
 	@GetMapping("/login1")
 	public String login1() {
 		return "pages/admin/admin_index";
+	}
+	
+	@GetMapping("/admin_types")
+	public String aTypes(){
+		return "pages/admin/admin_types";
+	}
+	
+	@GetMapping("/admin_type_input1")
+	public String aTypes1() {
+		return "pages/admin/admin_type_input";
 	}
 }
