@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+  author pxz
+  email buffll@foxmail.com
+-->
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="/commons/admin_fragments :: head(~{::title})">
+    <title>后台管理</title>
+  </head>
+  <body>
+    <!--导航-->
+    <div th:replace="/commons/admin_fragments :: navigation(0)"></div>
+
+    <!--中间内容-->
+    <div class="m-container-small m-padded-tb-big">
+      <div class="ui container">
+        <div class="ui success large message">
+          <h3>Hi,</h3>
+          <p>pxz，欢迎登录！</p>
+        </div>
+  
+        <img th:src="@{/img/wallpaper.png}"
+             class="ui rounded bordered fluid image"
+             style="height: 350px;">
+      </div>
+    </div>
+    <br>
+    <br>
+
+    <div th:replace="/commons/admin_fragments :: footer"></div>
+    <div th:replace="/commons/admin_fragments :: script"></div>
+
+    <script>
+      $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+      })
+
+      $('.ui.dropdown').dropdown({
+        on: 'hover'
+      })
+    </script>
+  </body>
+
+</html>

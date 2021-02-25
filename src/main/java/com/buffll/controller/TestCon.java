@@ -49,4 +49,14 @@ public class TestCon {
 	public String index7() {
 		return "pages/admin/blogs-input";
 	}
+	
+	@GetMapping("/login11")
+	public String login(){
+		return "pages/admin/login";
+	}
+	
+	@GetMapping("/login1")
+	public String login1() {
+		return "pages/admin/admin_index";
+	}
 }
