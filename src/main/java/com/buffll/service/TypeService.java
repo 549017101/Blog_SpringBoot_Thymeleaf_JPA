@@ -4,6 +4,8 @@ import com.buffll.entity.Type;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * 分类功能的业务层接口
  * @author pxz
@@ -30,6 +32,11 @@ public interface TypeService {
 	 * @return
 	 */
 	Page<Type> listType(Pageable pageable);
+	
+	/**
+	 * 获取所有分类(非分页查询)
+	 */
+	List<Type> listType();
 	
 	/**
 	 * 修改分类

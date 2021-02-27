@@ -138,19 +138,4 @@ public class Comment {
 	public void setParentComment(Comment parentComment) {
 		this.parentComment = parentComment;
 	}
-	
-	@Override
-	public String toString() {
-		return "Comment{" +
-				"id=" + id +
-				", nickname='" + nickname + '\'' +
-				", email='" + email + '\'' +
-				", content='" + content + '\'' +
-				", avatar='" + avatar + '\'' +
-				", createTime=" + createTime +
-				", blog=" + blog +
-				", replyComments=" + replyComments +
-				", parentComment=" + parentComment +
-				'}';
-	}
 }

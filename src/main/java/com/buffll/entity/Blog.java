@@ -112,6 +112,13 @@ public class Blog {
 	@OneToMany(mappedBy = "blog")
 	private List<Comment> comments = new ArrayList<>();
 	
+	/**
+	 * 博客所属的标签的Id<br>
+	 * 这个属性不需要保存在数据库中,所以用@Transient注解标注
+	 */
+	@Transient
+	private String tagIds;
+	
 	public Blog() {}
 	
 	public Long getId() {
@@ -250,26 +257,11 @@ public class Blog {
 		this.comments = comments;
 	}
 	
-	@Override
-	public String toString() {
-		return "Blog{" +
-				"id=" + id +
-				", title='" + title + '\'' +
-				", content='" + content + '\'' +
-				", firstPicture='" + firstPicture + '\'' +
-				", flag='" + flag + '\'' +
-				", views=" + views +
-				", appreciation=" + appreciation +
-				", shareStatement=" + shareStatement +
-				", commentabled=" + commentabled +
-				", published=" + published +
-				", recommend=" + recommend +
-				", createTime=" + createTime +
-				", updateTime=" + updateTime +
-				", type=" + type +
-				", tags=" + tags +
-				", user=" + user +
-				", comments=" + comments +
-				'}';
+	public String getTagIds() {
+		return tagIds;
+	}
+	
+	public void setTagIds(String tagIds) {
+		this.tagIds = tagIds;
 	}
 }

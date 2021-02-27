@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class TestCon {
 	
-	@GetMapping("/")
-	public String index() {
-		return "index";
-	}
-	
 	@GetMapping("/types")
 	public String index1() {
 		return "pages/types";
@@ -42,12 +37,12 @@ public class TestCon {
 	
 	@GetMapping("/blogs")
 	public String index6() {
-		return "pages/admin/blogs";
+		return "pages/admin/admin_blogs";
 	}
 	
 	@GetMapping("/blogs-input")
 	public String index7() {
-		return "pages/admin/blogs_input";
+		return "pages/admin/admin_blogs_input";
 	}
 	
 	@GetMapping("/login11")

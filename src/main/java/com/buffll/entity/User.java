@@ -147,20 +147,4 @@ public class User {
 	public void setBlogs(List<Blog> blogs) {
 		this.blogs = blogs;
 	}
-	
-	@Override
-	public String toString() {
-		return "User{" +
-				"id=" + id +
-				", nickname='" + nickname + '\'' +
-				", username='" + username + '\'' +
-				", password='" + password + '\'' +
-				", email='" + email + '\'' +
-				", avatar='" + avatar + '\'' +
-				", type=" + type +
-				", createTime=" + createTime +
-				", updateTime=" + updateTime +
-				", blogs=" + blogs +
-				'}';
-	}
 }

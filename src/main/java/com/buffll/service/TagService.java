@@ -4,6 +4,8 @@ import com.buffll.entity.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * 标签功能的业务层接口
  * @author pxz
@@ -51,4 +53,17 @@ public interface TagService {
 	 * @param id
 	 */
 	void deleteTag(Long id);
+	
+	/**
+	 * 获取所有标签(非分页)
+	 * @return
+	 */
+	List<Tag> listTag();
+	
+	/**
+	 * 通过多个id值的集合获取标签
+	 * @param ids
+	 * @return
+	 */
+	List<Tag> listTag(String ids);
 }

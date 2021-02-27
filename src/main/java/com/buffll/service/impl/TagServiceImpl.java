@@ -4,12 +4,16 @@ import com.buffll.dao.TagDao;
 import com.buffll.entity.Tag;
 import com.buffll.exception.NotFoundException;
 import com.buffll.service.TagService;
+import com.buffll.utils.MyUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author pxz
@@ -58,5 +62,16 @@ public class TagServiceImpl implements TagService {
 	@Override
 	public void deleteTag(Long id) {
 		tagDao.deleteById(id);
+	}
+	
+	@Override
+	public List<Tag> listTag() {
+		return tagDao.findAll();
+	}
+	
+	@Override
+	public List<Tag> listTag(String ids) {
+		//此时参数传入的ids是一个字符串,是1,2,3,4,5....这种形式的字符串,需要将这个字符串转换为集合
+		return tagDao.findAllById(MyUtils.convertToList(ids));
 	}
 }

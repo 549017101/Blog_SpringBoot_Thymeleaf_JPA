@@ -4,19 +4,17 @@
   email buffll@foxmail.com
 -->
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-
-  <head th:replace="/commons/fragments :: head(~{::title})">
+  <head th:replace="/commons/admin_fragments :: head(~{::title})">
     <title>分类编辑</title>
   </head>
-
   <body>
     <!--导航-->
     <div th:replace="/commons/admin_fragments :: navigation(2)"></div>
     <div class="ui attached pointing menu">
       <div class="ui container">
         <div class="right menu">
-          <a th:href="@{/admin/types/input}" class="teal active item">新增</a>
-          <a th:href="@{/admin/types}" class="teal item">列表</a>
+          <a th:href="@{/admin/types/input}" class="teal active item">新增分类</a>
+          <a th:href="@{/admin/types}" class="teal item">分类列表</a>
         </div>
       </div>
     </div>
@@ -55,10 +53,9 @@
     <br>
     <br>
  
-    <div th:replace="/commons/admin_fragments :: footer"></div>
-    
-    <script th:src="@{https://cdn.bootcdn.net/ajax/libs/jquery/3.2.0/jquery.min.js}"></script>
-    <script th:src="@{https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.js}"></script>
+    <div th:replace="/commons/fragments :: footer"></div>
+
+    <div th:replace="/commons/admin_fragments :: script"></div>
     <script>
 
       $('.menu.toggle').click(function () {

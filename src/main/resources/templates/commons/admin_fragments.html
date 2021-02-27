@@ -14,11 +14,8 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<title th:replace="${title}"></title>
 	<link rel="shortcut icon" th:href="@{/img/favicon.ico}" />
-	<link th:href="@{https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.css}" rel="stylesheet">
-	<link rel="stylesheet" th:href="@{/css/typo.css}">
-	<link rel="stylesheet" th:href="@{/css/animate.css}">
-	<link rel="stylesheet" th:href="@{/lib/prism/prism.css}">
-	<link rel="stylesheet" th:href="@{/lib/tocbot/tocbot.css}">
+	<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+
 	<link rel="stylesheet" th:href="@{/css/me.css}">
 </head>
 
@@ -26,7 +23,9 @@
 <nav th:fragment="navigation(n)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
 	<div class="ui container">
 		<div class="ui inverted secondary stackable menu">
-			<h2 class="ui teal header item">管理后台</h2>
+			<h3 class="ui teal header item">
+				<a class="ui teal header" th:href="@{/admin/index}">管理后台</a>
+			</h3>
 			<a th:href="@{/admin/blogs}" class="m-item item m-mobile-hide" th:classappend="${n == 1} ? 'active'">
 				<i class="home icon"></i>
 				博客
@@ -43,8 +42,8 @@
 			<div class="right m-item m-mobile-hide menu">
 				<div class="ui dropdown  item">
 					<div class="text">
-						<img class="ui avatar image" th:src="@{/img/my.png}">
-						pxz
+						<img class="ui avatar image" th:src="@{${session.user.avatar}}">
+						<span th:text="${session.user.nickname}"></span>
 					</div>
 					<i class="dropdown icon"></i>
 					<div class="menu">
@@ -60,106 +59,8 @@
 	</a>
 </nav>
 
-<!----------------------公共底部---------------------->
-<footer th:fragment="footer" class="ui inverted vertical segment m-padded-tb-massive">
-	<div class="ui center aligned container">
-		<div class="ui inverted divided stackable grid">
-			<div class="three wide column">
-				<div class="ui inverted link list">
-					<div class="item">
-						<img th:src="@{/img/vx.png}" class="ui rounded image" alt="QR Code" style="width: 110px">
-					</div>
-				</div>
-			</div>
-			<div class="three wide column">
-				<h4 class="ui inverted header m-text-thin m-text-spaced ">最新博客</h4>
-				<div class="ui inverted link list">
-					<a href="#" class="item m-text-thin">用户故事（User Story）</a>
-					<a href="#" class="item m-text-thin">用户故事（User Story）</a>
-					<a href="#" class="item m-text-thin">用户故事（User Story）</a>
-				</div>
-			</div>
-			<div class="three wide column">
-				<h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
-				<div class="ui inverted link list">
-					<span class="item m-text-thin" style="padding-bottom: 20px;">QQ：767722843</span>
-					<span class="item m-text-thin">Email：pcxyzz@foxmail.com</span>
-				</div>
-			</div>
-			
-			<div class="seven wide column">
-				<h4 class="ui inverted header m-text-thin m-text-spaced ">友情链接</h4>
-				<p class="m-text-thin m-text-spaced m-opacity-mini">
-					<a href="https://www.aliyun.com/" target="_blank"
-					   style="margin: 0px 0px 0px 5px; color: rgb(230, 230, 250); border-bottom: 1px dotted; padding: 1px;">
-						阿里云
-					</a>
-					<a href="https://github.com/" target="_blank"
-					   style="margin: 0px 0px 0px 5px; color: rgb(230, 230, 250); border-bottom: 1px dotted; padding: 1px;">
-						GitHub
-					</a>
-					<a href="https://gitee.com/" target="_blank"
-					   style="margin: 0px 0px 0px 5px; color: rgb(230, 230, 250); border-bottom: 1px dotted; padding: 1px;">
-						码云
-					</a>
-					<a href="http://www.alloyteam.com/nav/" target="_blank"
-					   style="margin: 0px 0px 0px 5px; color: rgb(230, 230, 250); border-bottom: 1px dotted; padding: 1px;">
-						Web前端导航
-					</a>
-					<a href="https://www.matools.com/" target="_blank"
-					   style="margin: 0px 0px 0px 5px; color: rgb(230, 230, 250); border-bottom: 1px dotted; padding: 1px;">
-						代码在线工具箱
-					</a>
-				</p>
-				
-				<p class="m-text-thin m-text-spaced m-opacity-mini">
-					<a href="https://www.matools.com/api/java8" target="_blank"
-					   style="margin: 0px 0px 0px 5px; color: rgb(230, 230, 250); border-bottom: 1px dotted; padding: 1px;">
-						Java API
-					</a>
-					<a href="https://cn.vuejs.org/" target="_blank"
-					   style="margin: 0px 0px 0px 5px; color: rgb(230, 230, 250); border-bottom: 1px dotted; padding: 1px;">
-						Vue官方文档
-					</a>
-					<a href="http://mvnrepository.com/" target="_blank"
-					   style="margin: 0px 0px 0px 5px; color: rgb(230, 230, 250); border-bottom: 1px dotted; padding: 1px;">
-						Maven仓库
-					</a>
-					<a href="https://spring.io/" target="_blank"
-					   style="margin: 0px 0px 0px 5px; color: rgb(230, 230, 250); border-bottom: 1px dotted; padding: 1px;">
-						Spring官网
-					</a>
-				</p>
-			</div>
-		</div>
-		
-		<!--底部分割线-->
-		<div class="ui inverted section divider"></div>
-		
-		<!--版权与备案信息-->
-		<span class="m-text-thin m-text-spaced m-opacity-tiny">Designed by Pxz</span>
-		<p class="m-text-thin m-text-spaced m-opacity-tiny">
-			<img th:src="@{/img/footer_ico.jpg}">
-			Copyright &copy; 2020 - 2021
-			<a href="http://buffll.cn" target="_blank" style="margin: 0px 0px 0px 5px; color: rgb(230, 230, 250);">
-				<span style="border-bottom: 1px dashed; padding: 1px;">www.buffll.cn</span>
-			</a>
-			&nbsp;&nbsp;|&nbsp;&nbsp;
-			<img th:src="@{/img/beian_img.png}" alt="津ICP备" style="width: 15px;margin-top: 3px;">
-			<a href="http://beian.miit.gov.cn/" target="_blank" style="margin: 0px 0px 0px 5px; color: rgb(230, 230, 250);">
-				津ICP备2020008539号
-			</a>
-		</p>
-	</div>
-</footer>
-
 <!----------------------公共js引用---------------------->
 <th:block th:fragment="script">
-	<script th:src="@{https://cdn.bootcdn.net/ajax/libs/jquery/3.2.0/jquery.min.js}"></script>
-	<script th:src="@{https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.js}"></script>
-	<script th:src="@{https://cdn.bootcdn.net/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js}"></script>
-	<script th:src="@{/lib/prism/prism.js}"></script>
-	<script th:src="@{/lib/tocbot/tocbot.min.js}"></script>
-	<script th:src="@{/lib/qrcode/qrcode.min.js}"></script>
-	<script th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 </th:block>

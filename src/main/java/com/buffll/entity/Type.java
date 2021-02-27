@@ -58,13 +58,4 @@ public class Type {
 	public void setBlogs(List<Blog> blogs) {
 		this.blogs = blogs;
 	}
-	
-	@Override
-	public String toString() {
-		return "Type{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", blogs=" + blogs +
-				'}';
-	}
 }

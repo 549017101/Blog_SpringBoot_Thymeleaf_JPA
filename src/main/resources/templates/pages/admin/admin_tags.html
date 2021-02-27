@@ -4,8 +4,7 @@
   email buffll@foxmail.com
 -->
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-
-  <head th:replace="/commons/fragments :: head(~{::title})">
+  <head th:replace="/commons/admin_fragments :: head(~{::title})">
     <title>标签管理</title>
   </head>
   <body>
@@ -13,8 +12,8 @@
     <div class="ui attached pointing menu">
       <div class="ui container">
         <div class="right menu">
-          <a th:href="@{/admin/tags/input}" class="item">新增</a>
-          <a th:href="@{/admin/tags}" class="teal active item">列表</a>
+          <a th:href="@{/admin/tags/input}" class="item">新增标签</a>
+          <a th:href="@{/admin/tags}" class="teal active item">标签列表</a>
         </div>
       </div>
     </div>
@@ -22,9 +21,9 @@
     <!--中间内容-->
     <div  class="m-container-small m-padded-tb-big">
       <div class="ui container">
-        <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+        <div class="ui success message" th:unless="${#strings.isEmpty(message)}" style="text-align: center">
           <i class="close icon"></i>
-          <div class="header">提示：</div>
+          <div class="header">提&nbsp;&nbsp;&nbsp;示</div>
           <p th:text="${message}"></p>
         </div>
         
@@ -69,10 +68,8 @@
     <br>
     <br>
   
-    <div th:replace="/commons/admin_fragments :: footer"></div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+    <div th:replace="/commons/fragments :: footer"></div>
+    <div th:replace="/commons/admin_fragments :: script"></div>
     <script>
       $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');

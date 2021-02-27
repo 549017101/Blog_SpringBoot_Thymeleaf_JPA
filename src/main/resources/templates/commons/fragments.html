@@ -14,7 +14,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<title th:replace="${title}"></title>
 	<link rel="shortcut icon" th:href="@{/img/favicon.ico}" />
-	<link th:href="@{https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.css}" rel="stylesheet">
+	<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
 	<link rel="stylesheet" th:href="@{/css/typo.css}">
 	<link rel="stylesheet" th:href="@{/css/animate.css}">
 	<link rel="stylesheet" th:href="@{/lib/prism/prism.css}">
@@ -159,9 +159,9 @@
 <!--th:block是thymeleaf中唯一的块级元素,它本身不会渲染到页面中,但是标签体中的内容会渲染-->
 <th:block th:fragment="script">
 	<!--semantic-ui 也需要依赖jquery-->
-	<script th:src="@{https://cdn.bootcdn.net/ajax/libs/jquery/3.2.0/jquery.min.js}"></script>
-	<script th:src="@{https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.js}"></script>
-	<script th:src="@{https://cdn.bootcdn.net/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js}"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
 	<script th:src="@{/lib/prism/prism.js}"></script>
 	<script th:src="@{/lib/tocbot/tocbot.min.js}"></script>
 	<script th:src="@{/lib/qrcode/qrcode.min.js}"></script>
