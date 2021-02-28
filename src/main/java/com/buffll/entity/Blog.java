@@ -28,6 +28,8 @@ public class Blog {
 	/**
 	 * 博客内容
 	 */
+	@Basic(fetch = FetchType.LAZY) //懒加载,节省资源
+	@Lob //指定持久属性或字段应作为大对象持久保存到数据库支持的大对象类型
 	private String content;
 	
 	/**
@@ -111,6 +113,11 @@ public class Blog {
 	 */
 	@OneToMany(mappedBy = "blog")
 	private List<Comment> comments = new ArrayList<>();
+	
+	/**
+	 * 博客描述
+	 */
+	private String description;
 	
 	/**
 	 * 博客所属的标签的Id<br>
@@ -263,5 +270,13 @@ public class Blog {
 	
 	public void setTagIds(String tagIds) {
 		this.tagIds = tagIds;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

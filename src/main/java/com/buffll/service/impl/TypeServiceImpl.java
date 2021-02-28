@@ -7,7 +7,9 @@ import com.buffll.service.TypeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,5 +68,14 @@ public class TypeServiceImpl implements TypeService {
 	@Override
 	public Type getTypeByName(String name) {
 		return typeDao.findByName(name);
+	}
+	
+	@Override
+	public List<Type> listTypeTop(Integer size) {
+		//springboot2.2.1（含）以上的版本Sort已经不能再实例化了，构造方法已经是私有的了！
+		//可以改用Sort.by获得Sort对象 下面的PageRequest也一样,需要改为.of()方法创建对象
+		Sort sort = Sort.by(Sort.Direction.DESC, "blogs.size");
+		Pageable pageable = PageRequest.of(0, size, sort);
+		return typeDao.findTop(pageable);
 	}
 }

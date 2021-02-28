@@ -5,11 +5,14 @@ import com.buffll.entity.Blog;
 import com.buffll.entity.Type;
 import com.buffll.exception.NotFoundException;
 import com.buffll.service.BlogService;
+import com.buffll.utils.MyBeanUtils;
 import com.buffll.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,6 +68,16 @@ public class BlogServiceImpl implements BlogService {
 		}, pageable);
 	}
 	
+	@Override
+	public Page<Blog> listBlog(Pageable pageable) {
+		return blogDao.findAll(pageable);
+	}
+	
+	@Override
+	public Page<Blog> listBlog(String query, Pageable pageable) {
+		return blogDao.findByQuery(query, pageable);
+	}
+	
 	@Transactional
 	@Override
 	public Blog saveBlog(Blog blog) {
@@ -85,28 +98,24 @@ public class BlogServiceImpl implements BlogService {
 	@Override
 	public Blog updateBlog(Long id, Blog blog) {
 		Blog b = blogDao.getOne(id);
-		
-		//将创建时间保存,形参blog中是个空对象,给它赋值后只有更新时间,创建时间为null,所以后面将创建时间单独设置即可
-		Date createTime = b.getCreateTime();
-		Integer views = b.getViews();
-		
-		if (b == null) {
+		if (b != null) {
+			BeanUtils.copyProperties(blog, b, MyBeanUtils.getNullPropertyNames(blog));
+			return blogDao.save(b);
+		}else{
 			throw new NotFoundException("该博客不存在");
 		}
-
-		BeanUtils.copyProperties(blog, b);
-		//BeanUtils.copyProperties(blog, b, MyBeanUtils.getNullPropertyNames(blog));
-		b.setUpdateTime(new Date());
-		b.setCreateTime(createTime);
-		b.setFlag(blog.getFlag());
-		b.setViews(views);
-		
-		return blogDao.save(b);
 	}
 	
 	@Transactional
 	@Override
 	public void deleteBlog(Long id) {
 		blogDao.deleteById(id);
+	}
+	
+	@Override
+	public List<Blog> listRecommendBlogTop(Integer size) {
+		Sort sort = Sort.by(Sort.Direction.DESC, "updateTime");
+		Pageable pageable = PageRequest.of(0, size, sort);
+		return blogDao.findTop(pageable);
 	}
 }

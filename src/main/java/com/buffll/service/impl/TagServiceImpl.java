@@ -8,11 +8,12 @@ import com.buffll.utils.MyUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,5 +74,12 @@ public class TagServiceImpl implements TagService {
 	public List<Tag> listTag(String ids) {
 		//此时参数传入的ids是一个字符串,是1,2,3,4,5....这种形式的字符串,需要将这个字符串转换为集合
 		return tagDao.findAllById(MyUtils.convertToList(ids));
+	}
+	
+	@Override
+	public List<Tag> listTagTop(Integer size) {
+		Sort sort = Sort.by(Sort.Direction.DESC, "blogs.size");
+		Pageable pageable = PageRequest.of(0, size, sort);
+		return tagDao.findTop(pageable);
 	}
 }

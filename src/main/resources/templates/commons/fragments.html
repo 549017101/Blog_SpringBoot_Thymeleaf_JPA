@@ -50,10 +50,12 @@
 			</a>
 			
 			<div class="right m-item item m-mobile-hide">
-				<div class="ui icon inverted input m-margin-tb-tiny">
-					<input type="text" placeholder="搜索....">
-					<i class="search link icon"></i>
-				</div>
+				<form th:action="@{/search}" method="post" name="search" target="_blank">
+					<div class="ui icon inverted input m-margin-tb-tiny">
+						<input type="text" name="query" placeholder="搜索...." th:value="${query}">
+						<i class="search link icon" onclick="document.forms['search'].submit()"></i>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

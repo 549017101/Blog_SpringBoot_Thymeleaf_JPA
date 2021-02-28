@@ -66,4 +66,12 @@ public interface TagService {
 	 * @return
 	 */
 	List<Tag> listTag(String ids);
+	
+	/**
+	 * 查询标签,并返回一个list,用于展示在首页的侧边栏<br>
+	 * 根据传入的size值来取数据列表的大小
+	 * @param size 显示的数据条数
+	 * @return
+	 */
+	List<Tag> listTagTop(Integer size);
 }

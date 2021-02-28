@@ -64,4 +64,9 @@ public class TestCon {
 	public String aTypes1() {
 		return "pages/admin/admin_type_input";
 	}
+	
+	@GetMapping("/se")
+	public String sear() {
+		return "pages/search";
+	}
 }

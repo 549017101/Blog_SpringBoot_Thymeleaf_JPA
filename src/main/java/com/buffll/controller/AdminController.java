@@ -18,24 +18,16 @@ import javax.servlet.http.HttpSession;
  * @create 2021-02-25 11:34
  */
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 	@Autowired
 	private UserService userService;
 	
 	/**
-	 * 跳转到项目首页
-	 * @return
-	 */
-	@GetMapping("/")
-	public String toIndex(){
-		return "index";
-	}
-	
-	/**
 	 * 跳转到登录页面
 	 * @return
 	 */
-	@GetMapping("/admin") //已经配置过该控制器的基础路径,如果注解不写具体的路径,则就跳转到@RequestMapping指定的路径
+	@GetMapping //已经配置过该控制器的基础路径,如果注解不写具体的路径,则就跳转到@RequestMapping指定的路径
 	public String toLoginPage(){
 		return "pages/admin/login";
 	}
@@ -44,7 +36,7 @@ public class AdminController {
 	 * 跳转到后台管理首页(只有在登录成功的情况下才能跳转)
 	 * @return
 	 */
-	@GetMapping("/admin/index")
+	@GetMapping("index")
 	public String toAdminPage(){
 		return "pages/admin/admin_index";
 	}
@@ -57,7 +49,7 @@ public class AdminController {
 	 * @param attributes 用于重定向之后还能带参数跳转的的工具类的对象
 	 * @return
 	 */
-	@PostMapping("/admin/login")
+	@PostMapping("/login")
 	public String login(@RequestParam String username,
 	                    @RequestParam String password,
 	                    HttpSession session,
@@ -80,7 +72,7 @@ public class AdminController {
 	 * 注销登录
 	 * @return
 	 */
-	@GetMapping("/admin/logout")
+	@GetMapping("/logout")
 	public String logout(HttpSession session){
 		//注销时将用户信息从session中删除
 		session.removeAttribute("user");

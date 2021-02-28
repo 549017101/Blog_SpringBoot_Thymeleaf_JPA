@@ -58,4 +58,12 @@ public interface TypeService {
 	 * @return
 	 */
 	Type getTypeByName(String name);
+	
+	/**
+	 * 查询分类,并返回一个list,用于展示在首页的侧边栏<br>
+	 * 根据传入的size值来取数据列表的大小
+	 * @param size 显示的数据条数
+	 * @return
+	 */
+	List<Type> listTypeTop(Integer size);
 }
