@@ -21,6 +21,13 @@ public interface BlogService {
 	Blog getBlog(Long id);
 	
 	/**
+	 * 获取并转换博客(将markdown语法转换为html),不改变数据库中的博客内容
+	 * @param id
+	 * @return
+	 */
+	Blog getAndConvert(Long id);
+	
+	/**
 	 * 分页查询,查询一组详细的blog数据
 	 * @param pageable
 	 * @param blog

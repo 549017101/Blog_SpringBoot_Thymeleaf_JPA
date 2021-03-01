@@ -10,6 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -54,5 +55,17 @@ public class IndexController {
 		model.addAttribute("search_blogs_page", blogService.listBlog("%" + query + "%", pageable));
 		model.addAttribute("query", query);
 		return "pages/search";
+	}
+	
+	/**
+	 * 跳转到博客详情页面,并根据博客id查询相对应的博客
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/blog/{id}")
+	public String blog(@PathVariable Long id, Model model) {
+		model.addAttribute("blog_details", blogService.getAndConvert(id));
+		return "pages/blog";
 	}
 }

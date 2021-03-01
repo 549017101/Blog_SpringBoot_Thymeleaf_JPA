@@ -5,6 +5,7 @@ import com.buffll.entity.Blog;
 import com.buffll.entity.Type;
 import com.buffll.exception.NotFoundException;
 import com.buffll.service.BlogService;
+import com.buffll.utils.MarkdownUtils;
 import com.buffll.utils.MyBeanUtils;
 import com.buffll.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
@@ -37,6 +38,20 @@ public class BlogServiceImpl implements BlogService {
 	@Override
 	public Blog getBlog(Long id) {
 		return blogDao.getOne(id);
+	}
+	
+	@Override
+	public Blog getAndConvert(Long id) {
+		Blog blog = blogDao.getOne(id);
+		if (blog == null) {
+			throw new NotFoundException("该博客不存在");
+		}
+		Blog b = new Blog();
+		//将获取到的blog复制一份,对这个对象的副本进行格式转换,否则的话会改变数据库中的内容
+		BeanUtils.copyProperties(blog, b);
+		String content = b.getContent();
+		b.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
+		return b;
 	}
 	
 	@Override
