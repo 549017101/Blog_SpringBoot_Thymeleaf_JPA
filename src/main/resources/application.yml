@@ -8,3 +8,5 @@ spring:
     mode: HTML
   profiles:
     active: dev
+
+comment.avatar: /img/photo/default.jpg  #评论默认的头像
