@@ -51,6 +51,7 @@ public class BlogServiceImpl implements BlogService {
 		BeanUtils.copyProperties(blog, b);
 		String content = b.getContent();
 		b.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
+		blogDao.updateViews(id);
 		return b;
 	}
 	
@@ -100,7 +101,7 @@ public class BlogServiceImpl implements BlogService {
 			//id为空表示新增,否则是修改
 			blog.setCreateTime(new Date());
 			blog.setUpdateTime(new Date());
-			blog.setViews(0);
+			blog.setViews(1);
 			if("".equals(blog.getFlag()) || blog.getFlag() == null){
 				//设置默认为原创
 				blog.setFlag("原创");

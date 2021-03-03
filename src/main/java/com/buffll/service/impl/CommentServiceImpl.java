@@ -85,8 +85,8 @@ public class CommentServiceImpl implements CommentService {
 	
 	@Override
 	public List<Comment> listCommentByBlogId(Long blogId) {
-		//根据创建时间对评论进行倒序排序
-		Sort sort = Sort.by(Sort.Direction.DESC, "createTime");
+		//根据创建时间对评论进行顺序排序
+			Sort sort = Sort.by(Sort.Direction.ASC, "createTime");
 		List<Comment> comments = commentDao.findByBlogIdAndParentCommentNull(blogId, sort);
 		return eachComment(comments);
 	}

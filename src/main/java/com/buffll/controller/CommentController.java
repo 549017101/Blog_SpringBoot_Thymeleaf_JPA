@@ -1,6 +1,7 @@
 package com.buffll.controller;
 
 import com.buffll.entity.Comment;
+import com.buffll.entity.User;
 import com.buffll.service.BlogService;
 import com.buffll.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,13 @@ public class CommentController {
 	public String commitComment(Comment comment, HttpSession session) {
 		Long blogId = comment.getBlog().getId();
 		comment.setBlog(blogService.getBlog(blogId));
-		comment.setAvatar(avatar);
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
+			comment.setAvatar(user.getAvatar());
+			comment.setAdminComment(true);
+		} else {
+			comment.setAvatar(avatar);
+		}
 		commentService.saveComment(comment);
 		return "redirect:/comments/" + blogId;
 	}

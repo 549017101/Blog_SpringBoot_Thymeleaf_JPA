@@ -64,6 +64,11 @@ public class Comment {
 	@ManyToOne
 	private Comment parentComment;
 	
+	/**
+	 * 是否为管理员评论
+	 */
+	private Boolean adminComment;
+	
 	public Comment() {
 	}
 	
@@ -137,5 +142,13 @@ public class Comment {
 	
 	public void setParentComment(Comment parentComment) {
 		this.parentComment = parentComment;
+	}
+	
+	public Boolean getAdminComment() {
+		return adminComment;
+	}
+	
+	public void setAdminComment(Boolean adminComment) {
+		this.adminComment = adminComment;
 	}
 }
