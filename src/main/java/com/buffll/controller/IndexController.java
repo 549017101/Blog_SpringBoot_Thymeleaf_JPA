@@ -58,6 +58,20 @@ public class IndexController {
 	}
 	
 	/**
+	 * 搜索后的翻页功能
+	 * @param query
+	 * @param pageable
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/search")
+	public String searchPage(@RequestParam(value = "query") String query ,@PageableDefault(size = 6, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable, Model model ){
+		model.addAttribute("search_blogs_page", blogService.listBlog("%" + query + "%", pageable));
+		model.addAttribute("query", query);
+		return "pages/search";
+	}
+	
+	/**
 	 * 跳转到博客详情页面,并根据博客id查询相对应的博客
 	 * @param id
 	 * @param model
@@ -67,5 +81,42 @@ public class IndexController {
 	public String blog(@PathVariable Long id, Model model) {
 		model.addAttribute("blog", blogService.getAndConvert(id));
 		return "pages/blog";
+	}
+	
+	/**
+	 * 跳转到关于我页面
+	 * @return
+	 */
+	@GetMapping("/about")
+	public String about(){
+		return "pages/about";
+	}
+	
+	/**
+	 * 底部的推荐博客(取最新的三条数据)
+	 * @return
+	 */
+	@GetMapping("/footer/newblog")
+	public String footerNewBlogs(Model model) {
+		model.addAttribute("newBlogs", blogService.listRecommendBlogTop(3));
+		return "commons/fragments :: newblogList";
+	}
+	
+	/**
+	 * 跳转到分类页面
+	 * @return
+	 */
+	@GetMapping("/types")
+	public String toTypes() {
+		return "redirect:/types/0";
+	}
+	
+	/**
+	 * 跳转到标签页面
+	 * @return
+	 */
+	//@GetMapping("/tags")
+	public String toTags() {
+		return "redirect:/tags/0";
 	}
 }

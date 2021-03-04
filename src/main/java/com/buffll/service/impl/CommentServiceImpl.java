@@ -104,4 +104,9 @@ public class CommentServiceImpl implements CommentService {
 		comment.setCreateTime(new Date());
 		return commentDao.save(comment);
 	}
+	
+	@Override
+	public Integer getCommentCount(Long blogId) {
+		return commentDao.countByComment(blogId);
+	}
 }

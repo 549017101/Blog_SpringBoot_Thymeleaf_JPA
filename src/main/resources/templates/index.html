@@ -14,7 +14,7 @@
     <div th:replace="/commons/fragments :: navigation(1)"></div>
 
     <!--中间内容-->
-    <div class="m-container m-padded-tb-big">
+    <div class="m-container m-padded-tb-big animated fadeIn">
       <div class="ui container">
         <div class="ui stackable grid">
 
@@ -69,7 +69,7 @@
                       </div>
                       <div class="right aligned five wide column">
                         <a href="#" target="_blank" th:text="${i_blog.type.name}"
-                           class="ui teal basic label m-padded-tiny m-text-thin"></a>
+                           class="ui teal basic label m-text-thin"></a>
                       </div>
                     </div>
                   </div>
@@ -117,13 +117,14 @@
                     分类
                   </div>
                   <div class="right aligned column">
-                    <a href="#" target="_blank">more <i class="angle double right icon"></i></a>
+                    <a th:href="@{/types}" target="_blank">more <i class="angle double right icon"></i></a>
                   </div>
                 </div>
               </div>
               <div class="ui teal segment">
                 <div class="ui fluid vertical menu">
-                  <a th:each="i_type : ${index_types}" class="item">
+                  <a th:href="@{/types/{id}(id=${i_type.id})}" th:each="i_type : ${index_types}"
+                     class="item" target="_blank">
                     <span th:text="${i_type.name}"></span>
                     <div class="ui teal basic left pointing label"
                          th:text="${#arrays.length(i_type.blogs)}"></div>
@@ -141,12 +142,12 @@
                     标签
                   </div>
                   <div class="right aligned column">
-                    <a href="#" target="_blank">more <i class="angle double right icon"></i></a>
+                    <a th:href="@{/tags}" target="_blank">more <i class="angle double right icon"></i></a>
                   </div>
                 </div>
               </div>
               <div class="ui teal segment">
-                <a href="" th:each="i_tag : ${index_tags}" target="_blank"
+                <a th:href="@{/tags/{id}(id=${i_tag.id})}" th:each="i_tag : ${index_tags}" target="_blank"
                    class="ui teal basic left pointing label m-margin-tb-tiny">
                   <span th:text="${i_tag.name}"></span>
                   <div class="detail" th:text="${#arrays.length(i_tag.blogs)}"></div>
@@ -184,10 +185,5 @@
   
     <div th:replace="/commons/fragments :: footer"></div>
     <div th:replace="/commons/fragments :: script"></div>
-    <script>
-      $('.menu.toggle').click(function () {
-        $('.m-item').toggleClass('m-mobile-hide');
-      });
-    </script>
   </body>
 </html>

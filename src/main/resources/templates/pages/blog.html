@@ -5,7 +5,7 @@
 -->
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/commons/fragments :: head(~{::title})">
-	<title>博客详情</title>
+	<title th:text="${blog.title}"></title>
 </head>
 <style>
 	p {
@@ -25,15 +25,17 @@
 			<div class="ui horizontal link list">
 				<div class="item">
 					<img th:src="@{${blog.user.avatar}}" alt="" class="ui avatar image">
-					<div class="content"><a th:href="@{${blog.user.nickname}}" class="header"></a></div>
-				</div>
-				<div class="item">
-					<i class="calendar icon"></i>
-					<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}"></span>
+					<div class="content">
+						<a th:href="@{/about}" class="header" th:text="${blog.user.nickname}"></a>
+					</div>
 				</div>
 				<div class="item">
 					<i class="eye icon"></i>
 					<span th:text="${blog.views} +1"></span>
+				</div>
+				<div class="item" style="margin-left: 560px;">
+					<span >更新时间:</span>
+					<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}"></span>
 				</div>
 			</div>
 		</div>
@@ -61,26 +63,28 @@
 			</div>
 			
 			<!--赞赏-->
-			<div class="ui center aligned basic segment">
-				<button id="payButton" class="ui orange basic circular button">赞赏</button>
-			</div>
-			<div class="ui payQR flowing popup transition hidden">
-				<div class="ui orange basic label">
-					<div class="ui images" style="font-size: inherit !important;">
-						<div class="image">
-							<img th:src="@{/img/zfb.png}" alt="" class="ui rounded bordered image" style="width: 120px">
-							<div>支付宝</div>
-						</div>
-						<div class="image">
-							<img th:src="@{/img/vxskm.png}" alt="" class="ui rounded bordered image" style="width: 120px">
-							<div>微信</div>
+			<div th:if="${blog.appreciation}">
+				<div class="ui center aligned basic segment">
+					<button id="payButton" class="ui orange basic circular button">赞赏</button>
+				</div>
+				<div class="ui payQR flowing popup transition hidden">
+					<div class="ui orange basic label">
+						<div class="ui images" style="font-size: inherit !important;">
+							<div class="image">
+								<img th:src="@{/img/zfb.png}" alt="" class="ui rounded bordered image" style="width: 120px">
+								<div>支付宝</div>
+							</div>
+							<div class="image">
+								<img th:src="@{/img/vxskm.png}" alt="" class="ui rounded bordered image" style="width: 120px">
+								<div>微信</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		
 		</div>
-		<div class="ui attached positive message">
+		<div class="ui attached positive message" th:if="${blog.shareStatement}">
 			<!--博客信息-->
 			<div class="ui middle aligned grid">
 				
@@ -105,12 +109,13 @@
 			</div>
 		</div>
 		
-		<div class="ui bottom attached segment">
+		<div class="ui bottom attached segment" th:if="${blog.commentabled}">
 			<!--留言区域列表-->
 			<div id="comment-container" class="ui teal segment">
 				<div th:fragment="commentList">
 					<div class="ui threaded comments" style="max-width: 100%">
 						<h3 class="ui dividing header">评论</h3>
+						<span th:if="${commentCount} == 0">当前还没有评论</span>
 						
 						<div class="comment" th:each="comment : ${comments}">
 							<a class="avatar">
@@ -239,100 +244,39 @@
 
 <div th:replace="/commons/fragments :: footer"></div>
 <div th:replace="/commons/fragments :: script"></div>
-
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+<script th:src="@{/lib/prism/prism.js}"></script>
+<script th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+<script th:src="@{/lib/qrcode/qrcode.min.js}"></script>
+<script th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
 <script th:inline="javascript">
 	$('.menu.toggle').click(function () {
-		$('.m-item').toggleClass('m-mobile-hide')
+		$('.m-item').toggleClass('m-mobile-hide');
 	})
 	
-	tocbot.init({
-		// Where to render the table of contents.
-		tocSelector: '.js-toc',
-		// Where to grab the headings to build the table of contents.
-		contentSelector: '.js-toc-content',
-		// Which headings to grab inside of the contentSelector element.
-		headingSelector: 'h1, h2, h3',
-	})
-	
-	//赞赏按钮浮动效果
-	$('#payButton').popup({
-		popup: $('.payQR.popup'),
-		//on: 'click',
+	//微信的悬浮窗
+	$('.wechat').popup({
+		popup: $('.wechat-qr'),
 		position: 'bottom center'
 	})
 	
-	//侧边栏目录按钮浮动效果
-	$('.toc.button').popup({
-		popup: $('.toc-container.popup'),
-		on: 'click',
-		position: 'left center'
+	//QQ的悬浮窗
+	$('.qq').popup({
+		popup: $('.qq-qr'),
+		position: 'bottom center'
 	})
 	
-	//侧边栏微信按钮浮动效果
-	$('.wechat').popup({
-		popup: $('.wechat-qr'),
-		position: 'left center'
+	//邮箱的悬浮窗
+	$('.email').popup({
+		popup: $('.email-qr'),
+		position: 'bottom center'
 	})
 	
-	// 扫描二维码在移动端阅读
-	// var qrcode = new QRCode("qrcode", {
-	//   //text: "../../static/img/vx.png",
-	//   width: 110,
-	//   height: 110,
-	//   colorDark: "#000000",
-	//   colorLight: "#ffffff",
-	//   correctLevel: QRCode.CorrectLevel.H
-	// })
-	
-	//移动到顶部
-	$('#toTop-button').click(function () {
-		$(window).scrollTo(0, 500)
-	})
-	
-	//移动到底部
-	$('#toButtom-button').click(function () {
-		$(window).scrollTo(document.body.scrollHeight, 500)
-	})
-	
-	let waypoint = new Waypoint({
-		element: document.getElementById('waypoint'),
-		handler: function (direction) {
-			if (direction === 'down') {
-				$('#toolbar').show(100);
-			} else {
-				$('#toolbar').hide(500);
-			}
-			//console.log('Scrolled to waypoint!  ' + direction);
-		}
-	})
-	
-	//评论表单验证
-	$('.ui.form').form({
-		fields: {
-			title: {
-				identifier: 'content',
-				rules: [{
-					type: 'empty',
-					prompt: '请输入评论内容'
-				}
-				]
-			},
-			content: {
-				identifier: 'nickname',
-				rules: [{
-					type: 'empty',
-					prompt: '请输入您的昵称'
-				}]
-			},
-			type: {
-				identifier: 'email',
-				rules: [{
-					type: 'email',
-					prompt: '请填写正确的邮箱地址'
-				}]
-			}
-		}
-	})
+	//github的悬浮窗
+	// $('.github').popup({
+	//   popup: $('.github-qr'),
+	//   position: 'bottom center'
+	// });
 	
 	$(function () {
 		$("#comment-container").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"");

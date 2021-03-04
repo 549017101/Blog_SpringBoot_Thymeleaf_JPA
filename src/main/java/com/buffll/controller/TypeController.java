@@ -44,7 +44,7 @@ public class TypeController {
 	 * @return
 	 */
 	@GetMapping("/types/input")
-	public String input(Model model) {
+	public String input(Model model, Long id) {
 		model.addAttribute("type",new Type());
 		return "pages/admin/admin_type_input";
 	}

@@ -24,9 +24,8 @@
     <!--中间内容-->
     <div class="m-container m-padded-tb-big">
       <div class="ui container">
-        
         <form id="blog-form" th:action="@{/admin/blogs}" th:object="${blog}" method="post" class="ui form">
-          <input type="hidden" name="published">
+          <input type="hidden" name="published" th:value="*{published}">
           <input type="hidden" name="id" th:value="*{id}">
           <div class="required field">
             <div class="ui left labeled input">
@@ -42,16 +41,13 @@
               <input type="text" name="title" placeholder="标题" th:value="*{title}">
             </div>
           </div>
-
           <div class="required field">
             <div id="md-content" style="z-index: 1 !important;">
               <textarea placeholder="博客内容" name="content"
                         th:text="*{content}" style="display: none;"></textarea>
             </div>
           </div>
-  
           <table>
-            
             <tr>
               <td>
                 <div class="required field" style="width: 500px; padding-right: 10px;">
@@ -79,7 +75,6 @@
                 </div>
               </td>
             </tr>
-            
             <tr>
               <td>
                 <div class="required field" style="padding-right: 10px;">
@@ -99,7 +94,6 @@
                 </div>
               </td>
             </tr>
-            
             <tr>
               <td>
                 <div class="required field" style="padding-right: 10px;">
@@ -110,36 +104,34 @@
                 </div>
               </td>
             </tr>
-            
           </table>
-          
           <div class="inline fields">
             <div class="field">
               <div class="ui checkbox">
-                <input type="checkbox" id="recommend" name="recommend"
+                <input type="checkbox" th:field="*{recommend}" id="recommend" name="recommend"
                        th:checked="*{recommend}" class="hidden">
                 <label for="recommend">推荐</label>
               </div>
             </div>
             <div class="field">
               <div class="ui checkbox">
-                <input type="checkbox" id="shareInfo" name="shareStatement"
+                <input type="checkbox" th:field="*{shareStatement}" id="shareInfo" name="shareStatement"
                        th:checked="*{shareStatement}" class="hidden">
                 <label for="shareInfo">转载声明</label>
               </div>
             </div>
             <div class="field">
               <div class="ui checkbox">
-                <input type="checkbox" id="appreciation" name="appreciation"
+                <input type="checkbox" th:field="*{appreciation}" id="appreciation" name="appreciation"
                        th:checked="*{appreciation}" class="hidden">
                 <label for="appreciation">赞赏</label>
               </div>
             </div>
             <div class="field">
               <div class="ui checkbox">
-                <input type="checkbox" id="comment" name="commentabled"
+                <input type="checkbox" th:field="*{commentabled}" id="commentabled" name="commentabled"
                        th:checked="*{commentabled}" class="hidden">
-                <label for="comment">评论</label>
+                <label for="commentabled">评论</label>
               </div>
             </div>
           </div>
@@ -151,17 +143,16 @@
             <button id="save-btn" type="button" class="ui secondary button">保存</button>
             <button id="publish-btn" type="button" class="ui teal button">发布</button>
           </div>
-
         </form>
       </div>
     </div>
     <br>
     <br>
- 
-    <div th:replace="/commons/fragments :: footer"></div>
-    
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+    <div style="position: sticky;top:100%">
+      <div th:replace="/commons/fragments :: footer"></div>
+    </div>
+    <div th:replace="/commons/admin_fragments :: script"></div>
     <script th:src="@{/lib/editormd/editormd.min.js}"></script>
     <script>
       //初始化Markdown编辑器
@@ -192,7 +183,7 @@
         $('[name="published"]').val(true);
         $('#blog-form').submit();
       })
-
+      
       $('.ui.form').form({
         fields: {
           title: {

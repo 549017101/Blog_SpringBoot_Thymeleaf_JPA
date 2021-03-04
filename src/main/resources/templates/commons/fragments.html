@@ -28,23 +28,23 @@
 		<div class="ui inverted secondary stackable menu">
 			<h2 class="ui teal header item">Blog</h2>
 			
-			<a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 1} ? 'active'">
+			<a th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n == 1} ? 'active'">
 				<i class="home icon"></i>
 				首页
 			</a>
-			<a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 2} ? 'active'">
+			<a th:href="@{/types/0}" class="m-item item m-mobile-hide" th:classappend="${n == 2} ? 'active'">
 				<i class="file alternate icon"></i>
 				分类
 			</a>
-			<a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 3} ? 'active'">
+			<a th:href="@{/tags/0}" class="m-item item m-mobile-hide" th:classappend="${n == 3} ? 'active'">
 				<i class="tags icon"></i>
 				标签
 			</a>
-			<a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 4} ? 'active'">
+			<a th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${n == 4} ? 'active'">
 				<i class="clone icon"></i>
 				归档
 			</a>
-			<a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 5} ? 'active'">
+			<a th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n == 5} ? 'active'">
 				<i class="info icon"></i>
 				关于我
 			</a>
@@ -77,10 +77,11 @@
 			</div>
 			<div class="three wide column">
 				<h4 class="ui inverted header m-text-thin m-text-spaced ">最新博客</h4>
-				<div class="ui inverted link list">
-					<a href="#" class="item m-text-thin">用户故事（User Story）</a>
-					<a href="#" class="item m-text-thin">用户故事（User Story）</a>
-					<a href="#" class="item m-text-thin">用户故事（User Story）</a>
+				<div id="newblog-container">
+					<div class="ui inverted link list" th:fragment="newblogList">
+						<a th:href="@{/blog/{id}(id=${blog.id})}" class="item m-text-thin" target="_blank"
+						   th:each="blog : ${newBlogs}" th:text="${blog.title}"></a>
+					</div>
 				</div>
 			</div>
 			<div class="three wide column">
@@ -163,21 +164,13 @@
 	<!--semantic-ui 也需要依赖jquery-->
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-	<script src="https://cdn.bootcdn.net/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
-	<script th:src="@{/lib/prism/prism.js}"></script>
-	<script th:src="@{/lib/tocbot/tocbot.min.js}"></script>
-	<script th:src="@{/lib/qrcode/qrcode.min.js}"></script>
-	<script th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+	<script th:inline="javascript">
+		$('.menu.toggle').click(function () {
+			$('.m-item').toggleClass('m-mobile-hide')
+		})
+		
+		$(function () {
+			$('#newblog-container').load(/*[[@{/footer/newblog}]]*/)
+		})
+	</script>
 </th:block>
-
-<!--翻页按钮-->
-<div th:fragment="pageUpDown" class="ui bottom attached segment">
-	<div class="ui middle aligned two column grid">
-		<div class="column">
-			<a href="#" class="ui mini teal basic button"><i class="caret left icon"></i>上一页</a>
-		</div>
-		<div class="right aligned column">
-			<a href="#" class="ui mini teal basic button">下一页<i class="caret right icon"></i></a>
-		</div>
-	</div>
-</div>

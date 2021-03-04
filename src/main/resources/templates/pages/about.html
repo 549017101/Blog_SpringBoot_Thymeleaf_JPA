@@ -19,13 +19,13 @@
         <div class="ui stackable grid">
           <div class="eleven wide column">
             <div class="ui segment">
-              <img th:src="@{/img/my.png}" alt="" class="ui rounded image" style="height: 500px;">
+              <img th:src="@{/img/my.png}" alt="" class="ui rounded image" style="height: 430px; width: 600px">
             </div>
           </div>
 
           <div class="five wide column">
             <div class="ui top attached segment">
-              <div class="ui header">关于我</div>
+              <div class="ui header" style="text-align: center">关于我</div>
             </div>
 
             <div class="ui attached segment">
@@ -52,44 +52,35 @@
 
             <!--联系图标-->
             <div class="ui bottom attached segment" style="text-align: center;">
-              <a href="https://github.com/549017101" class="ui github circular icon button">
+              <a href="https://github.com/549017101" class="ui github circular icon button" target="_blank">
                 <i class="github icon"></i>
               </a>
-
-              <a href="#" class="ui wechat circular icon button">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a class="ui wechat circular icon button">
                 <i class="weixin icon"></i>
               </a>
-
-              <a href="#" class="ui qq circular icon button" data-position="bottom center">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a class="ui qq circular icon button" data-position="bottom center">
                 <i class="qq icon"></i>
               </a>
-
-              <a href="#" class="ui email circular icon button">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a class="ui email circular icon button">
                 <i class="envelope icon"></i>
               </a>
             </div>
-
-            <!--悬浮的微信二维码-->
             <div class="ui wechat-qr flowing popup transition hidden">
               <img th:src="@{/img/vx.png}" alt="" class="ui rounded image" style="width: 150px">
             </div>
-
-            <!--悬浮的QQ二维码-->
             <div class="ui qq-qr flowing popup transition hidden">
               <p style="text-align: center;">QQ: 767722843</p>
               <img th:src="@{/img/qq.png}" alt="" class="ui rounded image" style="width: 150px">
             </div>
-
-            <!--悬浮的邮箱信息-->
             <div class="ui email-qr flowing popup transition hidden">
               <span style="text-align: center;"> pcxyzz@Foxmail.com </span>
             </div>
-
-            <!--悬浮的github地址-->
             <div class="ui github-qr flowing popup transition hidden">
               <p style="text-align: center;">https://github.com/549017101</p>
             </div>
-
           </div>
         </div>
       </div>
@@ -101,7 +92,7 @@
       $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
       })
-
+      
       //微信的悬浮窗
       $('.wechat').popup({
         popup: $('.wechat-qr'),
@@ -125,8 +116,6 @@
       //   popup: $('.github-qr'),
       //   position: 'bottom center'
       // });
-
     </script>
   </body>
-
 </html>

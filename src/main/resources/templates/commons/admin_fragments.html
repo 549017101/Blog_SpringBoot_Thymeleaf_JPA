@@ -28,15 +28,15 @@
 			</h3>
 			<a th:href="@{/admin/blogs}" class="m-item item m-mobile-hide" th:classappend="${n == 1} ? 'active'">
 				<i class="home icon"></i>
-				博客
+				博客管理
 			</a>
 			<a th:href="@{/admin/types}" class="m-item item m-mobile-hide" th:classappend="${n == 2} ? 'active'">
 				<i class="file alternate icon"></i>
-				分类
+				分类管理
 			</a>
 			<a th:href="@{/admin/tags}" class="m-item item m-mobile-hide" th:classappend="${n == 3} ? 'active'">
 				<i class="tags icon"></i>
-				标签
+				标签管理
 			</a>
 			
 			<div class="right m-item m-mobile-hide menu">
@@ -63,4 +63,13 @@
 <th:block th:fragment="script">
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+	<script th:inline="javascript">
+		$('.menu.toggle').click(function () {
+			$('.m-item').toggleClass('m-mobile-hide')
+		})
+		
+		$(function () {
+			$('#newblog-container').load(/*[[@{/footer/newblog}]]*/)
+		})
+	</script>
 </th:block>

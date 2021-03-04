@@ -23,106 +23,87 @@
               <h3 class="ui teal header">标签</h3>
             </div>
             <div class="right aligned column">
-              共 <h2 class="ui orange header m-inline-block m-text-thin"> 14 </h2> 个
+              共
+              <h2 class="ui orange header m-inline-block m-text-thin" th:text="${#arrays.length(tags)}"></h2>
+              个
             </div>
           </div>
         </div>
 
         <div id="myBar" class="ui attached segment m-padded-tb-large">
-          <a href="#" class="ui teal basic left pointing large label m-margin-tb-tiny" >
-            方法论
-            <div class="detail">23</div>
-          </a>
-
-          <a href="#" class="ui basic left pointing large label m-margin-tb-tiny" >
-            方法论
-            <div class="detail">22</div>
-          </a>
-
-          <a href="#" class="ui basic left pointing large label m-margin-tb-tiny" >
-            方法论
-            <div class="detail">22</div>
-          </a>
-
-          <a href="#" class="ui basic left pointing large label m-margin-tb-tiny">
-            方法论
-            <div class="detail">22</div>
-          </a>
-
-          <a href="#" class="ui basic left pointing large label m-margin-tb-tiny">
-            方法论
-            <div class="detail">22</div>
-          </a>
-
-          <a href="#" class="ui basic left pointing large label m-margin-tb-tiny">
-            方法论
-            <div class="detail">22</div>
-          </a>
-
-          <a href="#" class="ui basic left pointing large label m-margin-tb-tiny">
-            方法论
-            <div class="detail">22</div>
+          <a th:href="@{/tags/{id}(id=${tag.id})}" th:each="tag : ${tags}"
+             class="ui basic left pointing large label m-margin-tb-tiny"
+             th:classappend="${tag.id==activeTagId} ? 'teal'" >
+            <span th:text="${tag.name}"></span>
+            <div class="detail" th:text="${#arrays.length(tag.blogs)}"></div>
           </a>
         </div>
-
+  
         <div class="ui top attached teal segment">
-          <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-            <div class="ui mobile reversed stackable grid">
+          <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
+            <div class="ui middle aligned mobile reversed stackable grid">
               <div class="eleven wide column">
-
                 <h3 class="ui header">
-                  你真的理解什么是财富自由吗？
-                  <a href="#" class="ui  basic teal left pointing label m-padded-mini m-text-thin">方法论</a>
+                  <a th:href="@{/blog/{id}(id=${blog.id})}" target="_blank"
+                     class="m-black" th:text="${blog.title}"></a>
                 </h3>
-                <br>
-                <p class="m-text">
-                  正确做好任何一件事情的前提是清晰、正确的理解目标。
-                  而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，只是大家都那么做而已...
-                </p>
+                <p class="m-text" th:text="|${blog.description}......|"></p>
                 <div class="ui stackable grid">
                   <div class="row">
                     <div class="eleven wide column">
                       <div class="ui mini horizontal link list">
                         <div class="item">
-                          <img th:src="@{/img/my.png}" alt="" class="ui avatar image">
-                          <div class="content"><a href="#" class="header">pxz</a></div>
+                          <img th:src="@{${blog.user.avatar}}" class="ui avatar image">
+                          <div class="content">
+                            <a class="header" th:text="${blog.user.nickname}"></a>
+                          </div>
                         </div>
                         <div class="item">
                           <i class="calendar icon"></i>
-                          2021-02-20
+                          <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}"></span>
                         </div>
                         <div class="item">
                           <i class="eye icon"></i>
-                          2342
+                          <span th:text="${blog.views}"></span>
                         </div>
                       </div>
                     </div>
-
                     <div class="right aligned five wide column">
-                      <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin">认知升级</a>
+                      <a target="_blank" class="ui teal basic label m-text-thin"
+                         th:text="${blog.type.name}"></a>
                     </div>
-                    <!-- 
-                      <div class="row">
-                        <div class="column">
-                          <a href="#" class="ui  basic teal left pointing label m-padded-mini m-text-thin">方法论</a>
-                        </div>
-                      </div> 
-                    -->
+                  </div>
+                  <div class="row">
+                    <div class="column">
+                      <a th:href="@{/tags/{id}(id=${tag.id})}"
+                         class="ui basic left pointing label m-text-thin"
+                         th:classappend="${tag.id==activeTagId} ? 'teal'" th:each="tag : ${blog.tags}"
+                         th:text="${tag.name}"></a>
+                    </div>
                   </div>
                 </div>
               </div>
-
               <div class="five wide column">
-                <a href="#" target="_blank">
-                  <img th:src="@{/img/my.png}" alt="" class="ui rounded image" style="height: 150px; width: 200px;">
+                <a th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                  <img th:src="@{${blog.firstPicture}}" class="ui rounded image" style="height: 150px; width: 200px;">
                 </a>
               </div>
             </div>
           </div>
         </div>
-
-        <!--上一页与下一页-->
-        <div th:replace="/commons/fragments :: pageUpDown"></div>
+  
+        <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
+          <div class="ui middle aligned two column grid">
+            <div class="column">
+              <a id="last" th:unless="${page.first}"
+                 class="ui mini teal basic button">上一页</a>
+            </div>
+            <div class="right aligned column" >
+              <a id="next" th:unless="${page.last}"
+                 class="ui mini teal basic button">下一页</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <br>
@@ -130,54 +111,16 @@
 
     <div th:replace="/commons/fragments :: footer"></div>
     <div th:replace="/commons/fragments :: script"></div>
-    <script type="text/javascript">
-      $('.menu.toggle').click(function () {
-        $('.m-item').toggleClass('m-mobile-hide');
-      });
-      
-      //点击状态 默认为false
-      //let barFlag = false;
-
-      let barName = $("#myBar").children("a")
-
-      // //鼠标移入效果
-      // for(let i = 0; i < barName.length; i++){
-      //   barName[i].onmouseover = function(){
-      //     // teal 类可以实现高亮显示效果
-      //     this.className="ui teal basic left pointing large label m-margin-tb-tiny"
-      //   }
-      // }
-
-      // //鼠标移出效果
-      // for(let i = 0; i < barName.length; i++){
-      //   barName[i].onmouseout = function(){
-      //     // teal 类可以实现高亮显示效果
-      //     this.className="ui basic left pointing large label m-margin-tb-tiny"
-      //   }
-      // }
-
-      //点击按钮改变状态 方式一: js代码
-      for (let i = 0; i < barName.length; i++) {
-        barName[i].onclick = function(){
-          for (let j = 0; j < barName.length; j++) {
-            //为当前按钮设置默认效果
-            barName[j].className = "ui basic left pointing large label m-margin-tb-tiny"
-          }
-          //添加高亮效果
-          barName[i].className = "ui teal basic left pointing large label m-margin-tb-tiny"
-          //barFlag = true;
-        }
-        //console.log(barFlag);
-      }
-      
-      //点击按钮改变状态 方式二: 点击事件
-        // function changeBg(data) {
-        //   for (let i = 0; i < barName.length; i++) {
-        //     barName[i].className = "ui basic left pointing large label m-margin-tb-tiny"
-        //   }
-        //   data.className = "ui teal basic left pointing large label m-margin-tb-tiny"
-        // }
+    <script th:inline="javascript">
+      /**
+       * 翻页功能
+       */
+      $(function () {
+        let nextUrl = '/tags/' + [[${activeTagId}]] + '?page=' + [[ ${page.number} + 1]]
+        let lastUrl = '/tags/' + [[${activeTagId}]] + '?page=' + [[ ${page.number} - 1]]
+        $('#next').attr("href", nextUrl)
+        $('#last').attr("href", lastUrl)
+      })
     </script>
   </body>
-
 </html>

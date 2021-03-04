@@ -3,6 +3,8 @@ package com.buffll.dao;
 import com.buffll.entity.Comment;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -20,4 +22,12 @@ public interface CommentDao extends JpaRepository<Comment, Long> {
 	 * @return
 	 */
 	List<Comment> findByBlogIdAndParentCommentNull(Long blogId, Sort sort);
+	
+	/**
+	 * 根据博客id查询当前博客的总评论数
+	 * @param blogId
+	 * @return
+	 */
+	@Query(nativeQuery = true, value = "SELECT count(c.content) FROM t_comment c WHERE c.blog_id = :blogid")
+	Integer countByComment(@Param("blogid") Long blogId);
 }

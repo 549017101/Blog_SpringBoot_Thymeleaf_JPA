@@ -23,4 +23,10 @@ public interface CommentService {
 	 * @return
 	 */
 	Comment saveComment(Comment comment);
+	
+	/**
+	 * 根据博客id查询当前博客的总评论数
+	 * @param blogId
+	 */
+	Integer getCommentCount(Long blogId);
 }

@@ -71,7 +71,6 @@
                        style="height: 150px; width: 240px;">
                 </a>
               </div>
-        
             </div>
           </div>
         </div>
@@ -79,16 +78,14 @@
         <div class="ui bottom attached segment" th:if="${search_blogs_page.totalPages}>1">
           <div class="ui middle aligned two column grid">
             <div class="column">
-              <a th:href="@{/(page=${search_blogs_page.number}-1)}"
-                 th:unless="${search_blogs_page.first}"
+              <a id="last" th:unless="${search_blogs_page.first}"
                  class="ui mini teal basic button">
                 <i class="caret left icon"></i>
                 上一页
               </a>
             </div>
             <div class="right aligned column">
-              <a th:href="@{/(page=${search_blogs_page.number}+1)}"
-                 th:unless="${search_blogs_page.last}"
+              <a id="next" th:unless="${search_blogs_page.last}"
                  class="ui mini teal basic button">
                 下一页
                 <i class="caret right icon"></i>
@@ -104,10 +101,17 @@
 
     <div th:replace="/commons/fragments :: footer"></div>
     <div th:replace="/commons/fragments :: script"></div>
-    <script>
-      $('.menu.toggle').click(function () {
-        $('.m-item').toggleClass('m-mobile-hide');
-      });
+    <script th:inline="javascript">
+      /**
+       * 翻页功能
+       */
+      $(function () {
+        let query = [[${query}]] //搜索条件
+        let nextUrl = '/search' + '?query=' + query + '&page=' + [[ ${search_blogs_page.number} + 1]]
+        let lastUrl = '/search' + '?query=' + query + '&page=' + [[ ${search_blogs_page.number} - 1]]
+        $('#next').attr("href", nextUrl)
+        $('#last').attr("href", lastUrl)
+      })
     </script>
   </body>
 </html>

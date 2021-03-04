@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 博客功能的业务层接口
@@ -43,6 +44,14 @@ public interface BlogService {
 	Page<Blog> listBlog(Pageable pageable);
 	
 	/**
+	 * 根据标签查询博客(关联查询),只要有一个标签属于某个博客,就将它查询出来
+	 * @param tagId
+	 * @param pageable
+	 * @return
+	 */
+	Page<Blog> listBlog(Long tagId, Pageable pageable);
+	
+	/**
 	 * 分页查询,全局搜索功能
 	 * @param query 查询条件
 	 * @param pageable
@@ -78,4 +87,16 @@ public interface BlogService {
 	 * @return
 	 */
 	List<Blog> listRecommendBlogTop(Integer size);
+	
+	/**
+	 * 将博客按照条件归档,存放在Map中
+	 * @return
+	 */
+	Map<String, List<Blog>> archiveBlog();
+	
+	/**
+	 * 获取博客总条数
+	 * @return
+	 */
+	Long countBlog();
 }
