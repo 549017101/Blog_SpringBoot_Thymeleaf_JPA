@@ -5,13 +5,13 @@
 -->
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
-  <head th:replace="/commons/fragments :: head(~{::title})">
+  <head th:replace="commons/fragments :: head(~{::title})">
     <title>首页</title>
   </head>
 
   <body>
     <!--导航-->
-    <div th:replace="/commons/fragments :: navigation(1)"></div>
+    <div th:replace="commons/fragments :: navigation(1)"></div>
 
     <!--中间内容-->
     <div class="m-container m-padded-tb-big animated fadeIn">
@@ -183,7 +183,7 @@
     <br>
     <br>
   
-    <div th:replace="/commons/fragments :: footer"></div>
-    <div th:replace="/commons/fragments :: script"></div>
+    <div th:replace="commons/fragments :: footer"></div>
+    <div th:replace="commons/fragments :: script"></div>
   </body>
 </html>

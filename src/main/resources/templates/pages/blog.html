@@ -4,7 +4,7 @@
   email buffll@foxmail.com
 -->
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/commons/fragments :: head(~{::title})">
+<head th:replace="commons/fragments :: head(~{::title})">
 	<title th:text="${blog.title}"></title>
 </head>
 <style>
@@ -15,7 +15,7 @@
 
 <body>
 <!--导航-->
-<div th:replace="/commons/fragments :: navigation(0)"></div>
+<div th:replace="commons/fragments :: navigation(0)"></div>
 
 <!--中间内容-->
 <div id="waypoint" class="m-container-small m-padded-tb-big animated fadeIn">
@@ -242,41 +242,74 @@
 <br>
 <span id="myButtom"></span>
 
-<div th:replace="/commons/fragments :: footer"></div>
-<div th:replace="/commons/fragments :: script"></div>
+<div th:replace="commons/fragments :: footer"></div>
+<div th:replace="commons/fragments :: script"></div>
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
 <script th:src="@{/lib/prism/prism.js}"></script>
 <script th:src="@{/lib/tocbot/tocbot.min.js}"></script>
 <script th:src="@{/lib/qrcode/qrcode.min.js}"></script>
 <script th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
 <script th:inline="javascript">
-	$('.menu.toggle').click(function () {
-		$('.m-item').toggleClass('m-mobile-hide');
+	
+	tocbot.init({
+		// Where to render the table of contents.
+		tocSelector: '.js-toc',
+		// Where to grab the headings to build the table of contents.
+		contentSelector: '.js-toc-content',
+		// Which headings to grab inside of the contentSelector element.
+		headingSelector: 'h1, h2, h3',
 	})
 	
-	//微信的悬浮窗
+	//赞赏按钮浮动效果
+	$('#payButton').popup({
+		popup: $('.payQR.popup'),
+		//on: 'click',
+		position: 'bottom center'
+	})
+	
+	//侧边栏目录按钮浮动效果
+	$('.toc.button').popup({
+		popup: $('.toc-container.popup'),
+		on: 'click',
+		position: 'left center'
+	})
+	
+	//侧边栏微信按钮浮动效果
 	$('.wechat').popup({
 		popup: $('.wechat-qr'),
-		position: 'bottom center'
+		position: 'left center'
 	})
 	
-	//QQ的悬浮窗
-	$('.qq').popup({
-		popup: $('.qq-qr'),
-		position: 'bottom center'
+	// 扫描二维码在移动端阅读
+	// var qrcode = new QRCode("qrcode", {
+	//   //text: "../../static/img/vx.png",
+	//   width: 110,
+	//   height: 110,
+	//   colorDark: "#000000",
+	//   colorLight: "#ffffff",
+	//   correctLevel: QRCode.CorrectLevel.H
+	// })
+	
+	//移动到顶部
+	$('#toTop-button').click(function () {
+		$(window).scrollTo(0, 500)
+	})
+	//移动到底部
+	$('#toButtom-button').click(function () {
+		$(window).scrollTo(document.body.scrollHeight, 500)
 	})
 	
-	//邮箱的悬浮窗
-	$('.email').popup({
-		popup: $('.email-qr'),
-		position: 'bottom center'
+	let waypoint = new Waypoint({
+		element: document.getElementById('waypoint'),
+		handler: function (direction) {
+			if (direction === 'down') {
+				$('#toolbar').show(100);
+			} else {
+				$('#toolbar').hide(500);
+			}
+			//console.log('Scrolled to waypoint!  ' + direction);
+		}
 	})
-	
-	//github的悬浮窗
-	// $('.github').popup({
-	//   popup: $('.github-qr'),
-	//   position: 'bottom center'
-	// });
 	
 	$(function () {
 		$("#comment-container").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"");

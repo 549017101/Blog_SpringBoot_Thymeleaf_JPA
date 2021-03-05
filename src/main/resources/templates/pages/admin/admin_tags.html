@@ -4,11 +4,11 @@
   email buffll@foxmail.com
 -->
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="/commons/admin_fragments :: head(~{::title})">
+  <head th:replace="commons/admin_fragments :: head(~{::title})">
     <title>标签管理</title>
   </head>
   <body>
-    <div th:replace="/commons/admin_fragments :: navigation(3)"></div>
+    <div th:replace="commons/admin_fragments :: navigation(3)"></div>
     <div class="ui attached pointing menu">
       <div class="ui container">
         <div class="right menu">
@@ -69,9 +69,9 @@
     <br>
 
     <div style="position: sticky;top:100%">
-      <div th:replace="/commons/fragments :: footer"></div>
+      <div th:replace="commons/fragments :: footer"></div>
     </div>
-    <div th:replace="/commons/admin_fragments :: script"></div>
+    <div th:replace="commons/admin_fragments :: script"></div>
     <script>
       $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');

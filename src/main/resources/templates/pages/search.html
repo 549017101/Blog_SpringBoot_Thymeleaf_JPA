@@ -5,12 +5,12 @@
   2021-02-28 17:20
 -->
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="/commons/fragments :: head(~{::title})">
+  <head th:replace="commons/fragments :: head(~{::title})">
     <title>搜索结果</title>
   </head>
   
   <body>
-    <div th:replace="/commons/fragments :: navigation(0)"></div>
+    <div th:replace="commons/fragments :: navigation(0)"></div>
 
     <div class="m-container-small m-padded-tb-big">
       <div class="ui container">
@@ -99,8 +99,8 @@
     <br>
     <br>
 
-    <div th:replace="/commons/fragments :: footer"></div>
-    <div th:replace="/commons/fragments :: script"></div>
+    <div th:replace="commons/fragments :: footer"></div>
+    <div th:replace="commons/fragments :: script"></div>
     <script th:inline="javascript">
       /**
        * 翻页功能

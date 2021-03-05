@@ -39,6 +39,5 @@ public class Md5Utils {
 			e.printStackTrace();
 			return null;
 		}
-		
 	}
 }

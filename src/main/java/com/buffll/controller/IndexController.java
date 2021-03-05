@@ -115,7 +115,7 @@ public class IndexController {
 	 * 跳转到标签页面
 	 * @return
 	 */
-	//@GetMapping("/tags")
+	@GetMapping("/tags")
 	public String toTags() {
 		return "redirect:/tags/0";
 	}

@@ -4,7 +4,7 @@
   email buffll@foxmail.com
 -->
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="/commons/admin_fragments :: head(~{::title})">
+  <head th:replace="commons/admin_fragments :: head(~{::title})">
     <title>登录</title>
   </head>
   <body>
@@ -47,7 +47,7 @@
       </div>
     </div>
     
-    <div th:replace="/commons/admin_fragments :: script"></div>
+    <div th:replace="commons/admin_fragments :: script"></div>
     <script>
       $('.ui.form').form({
         fields: {
