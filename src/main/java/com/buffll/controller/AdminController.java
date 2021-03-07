@@ -1,9 +1,13 @@
 package com.buffll.controller;
 
+import com.buffll.dao.UserDao;
 import com.buffll.entity.User;
 import com.buffll.service.UserService;
+import com.buffll.utils.Md5Utils;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,6 +23,9 @@ import javax.servlet.http.HttpSession;
 public class AdminController {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserDao userDao;
 	
 	/**
 	 * 跳转到登录页面
@@ -74,5 +81,26 @@ public class AdminController {
 		//注销时将用户信息从session中删除
 		session.removeAttribute("user");
 		return "redirect:/admin";
+	}
+	
+	/**
+	 * 修改密码
+	 * @param username 用户名
+	 * @param oldpwd 旧密码
+	 * @param newpwd 新密码
+	 * @param attributes
+	 * @return
+	 */
+	@PostMapping("/change")
+	public String changePassword(@RequestParam String username, @RequestParam String oldpwd, @RequestParam String newpwd, RedirectAttributes attributes) {
+		User user = userDao.findByUsernameAndPassword(username, Md5Utils.code(oldpwd));
+		if(user != null){
+			userService.changePassword(username, oldpwd, newpwd);
+			attributes.addFlashAttribute("message", "修改成功");
+			return "redirect:/admin/logout";
+		}else{
+			attributes.addFlashAttribute("message", "修改失败");
+			return "redirect:/admin/index";
+		}
 	}
 }

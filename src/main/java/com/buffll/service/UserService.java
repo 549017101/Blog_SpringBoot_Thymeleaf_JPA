@@ -16,4 +16,13 @@ public interface UserService {
 	 * @return 用户对象
 	 */
 	User checkUser(String username, String password);
+	
+	/**
+	 * 修改密码
+	 * @param username 要修改密码的用户名
+	 * @param oldpwd 旧密码
+	 * @param newpwd 新密码
+	 * @return
+	 */
+	User changePassword(String username ,String oldpwd, String newpwd);
 }

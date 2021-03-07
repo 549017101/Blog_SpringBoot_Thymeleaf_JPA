@@ -40,13 +40,14 @@
 			</a>
 			
 			<div class="right m-item m-mobile-hide menu">
-				<div class="ui dropdown  item">
+				<div class="ui dropdown item">
 					<div class="text">
 						<img class="ui avatar image" th:src="@{${session.user.avatar}}">
 						<span th:text="${session.user.nickname}"></span>
 					</div>
 					<i class="dropdown icon"></i>
 					<div class="menu">
+						<a id="btn" class="item" href="javascript:void(0)">修改密码</a>
 						<a th:href="@{/admin/logout}" class="item">注销</a>
 					</div>
 				</div>
@@ -55,6 +56,49 @@
 					返回首页
 				</a>
 			</div>
+			
+			<!--------------------------------------------------->
+			<div class="container">
+				<div class="ui modal" style="width: 500px;">
+					<i class="close icon"></i>
+					<div class="header"><i class="user icon">
+					</i>用户信息
+					</div>
+					<div class="content">
+						
+						<form method="post" th:action="@{/admin/change}" class="ui form">
+							<input type="hidden" name="id" value="">
+							<div class=" field">
+								<div class="ui left labeled input">
+									<label class="ui teal basic label">用户名</label>
+									<input type="text" name="username" placeholder="请输入用户名">
+								</div>
+							</div>
+							
+							<div class=" field">
+								<div class="ui left labeled input">
+									<label class="ui teal basic label">原密码</label>
+									<input type="password" name="oldpwd" placeholder="请输入原密码">
+								</div>
+							</div>
+							
+							<div class=" field">
+								<div class="ui left labeled input">
+									<label class="ui teal basic label">新密码</label>
+									<input type="password" name="newpwd" placeholder="请输入新密码">
+								</div>
+							</div>
+							
+							<br>
+							<div class="ui right aligned container">
+								<button class="ui teal submit button">提交</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!--------------------------------------------------->
+		
 		</div>
 	</div>
 	
@@ -70,6 +114,11 @@
 	<script th:inline="javascript">
 		$('.menu.toggle').click(function () {
 			$('.m-item').toggleClass('m-mobile-hide')
+		})
+		
+		//展示模态框
+		$("#btn").on("click", function () {
+			$(".ui.modal").modal("show");
 		})
 		
 		$(function () {
