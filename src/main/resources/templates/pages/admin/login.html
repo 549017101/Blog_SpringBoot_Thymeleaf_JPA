@@ -31,6 +31,21 @@
                   </div>
                 </div>
   
+                <!------------------------------------------->
+                <div class="field">
+                  <div class="ui left icon input" style="float: left; width: 65%">
+                    <i class="edit outline icon"></i>
+                    <input type="text" name="scode" placeholder="验证码">
+                  </div>
+                  <div style="padding-left: 20px;">
+                    <img id="num" th:src="@{/admin/captcha/code}" />
+                    <a href="javascript:" onclick="document.getElementById('num').src='/admin/captcha/code?' + (new Date()).getTime()">
+                      <i class="redo icon"></i>
+                    </a>
+                  </div>
+                </div>
+                <!------------------------------------------->
+                
                 <div class="ui two bottom attached buttons">
                   <div class="ui primary basic submit button">登&nbsp;&nbsp;录</div>
                   <div class="ui teal basic button" onclick="window.location.href='/'">返&nbsp;&nbsp;回</div>
@@ -63,6 +78,13 @@
             rules: [{
               type: 'empty',
               prompt: '请输入密码'
+            }]
+          },
+          scode: {
+            identifier: 'scode',
+            rules: [{
+              type: 'empty',
+              prompt: '请输入验证码'
             }]
           }
         }
