@@ -41,7 +41,7 @@
 			
 			<div class="right m-item m-mobile-hide menu">
 				<div class="ui dropdown item">
-					<div class="text">
+					<div>
 						<img class="ui avatar image" th:src="@{${session.user.avatar}}">
 						<span th:text="${session.user.nickname}"></span>
 					</div>
@@ -89,6 +89,11 @@
 								</div>
 							</div>
 							
+							<div class="ui error mini message"></div>
+							<div class="ui mini negative message"
+							     th:unless="${#strings.isEmpty(message)}" th:text="${message}">
+							</div>
+							
 							<br>
 							<div class="ui right aligned container">
 								<button class="ui teal submit button">提交</button>
@@ -123,6 +128,32 @@
 		
 		$(function () {
 			$('#newblog-container').load(/*[[@{/footer/newblog}]]*/)
+		})
+		
+		$('.ui.form').form({
+			fields: {
+				username: {
+					identifier: 'username',
+					rules: [{
+						type: 'empty',
+						prompt: '请输入用户名'
+					}]
+				},
+				oldpwd: {
+					identifier: 'oldpwd',
+					rules: [{
+						type: 'empty',
+						prompt: '请输入旧密码'
+					}]
+				},
+				newpwd: {
+					identifier: 'newpwd',
+					rules: [{
+						type: 'empty',
+						prompt: '请输入新密码'
+					}]
+				}
+			}
 		})
 	</script>
 </th:block>

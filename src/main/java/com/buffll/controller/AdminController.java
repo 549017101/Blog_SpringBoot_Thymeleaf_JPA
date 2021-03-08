@@ -5,10 +5,8 @@ import com.buffll.entity.User;
 import com.buffll.service.UserService;
 import com.buffll.utils.Md5Utils;
 import com.buffll.utils.ValidateImageCodeUtils;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 

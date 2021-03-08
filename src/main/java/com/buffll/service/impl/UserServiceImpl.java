@@ -5,7 +5,6 @@ import com.buffll.entity.User;
 import com.buffll.exception.NotFoundException;
 import com.buffll.service.UserService;
 import com.buffll.utils.Md5Utils;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -4,21 +4,27 @@
   Email: buffll@foxmail.com
   2021-02-23 10:26
 -->
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta name="Author" content="pxz" />
-    <meta http-equiv="content-type" content="text/html" charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="shortcut icon" th:href="@{/img/favicon.ico}" />
-    <title>500</title>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+  <head th:replace="commons/fragments :: head(~{::title})">
+    <title>500 Internal server error</title>
   </head>
   
-  <body style="margin:0; padding:0;">
+  <body>
+    <div th:replace="commons/fragments :: navigation(0)"></div>
+    
     <div style="text-align: center; padding-top: 150px;">
       <h1>Error</h1>
       <h2>status: [[${status}]]</h2>
       <h3 th:text="'异常信息: '+ ${message}"></h3>
       <h3 th:text="'错误时间: '+ ${timestamp}"></h3>
     </div>
+    <br>
+    <br>
+
+    <div style="position: sticky;top:100%">
+      <div th:replace="commons/fragments :: footer"></div>
+    </div>
+    <div th:replace="commons/fragments :: script"></div>
   </body>
 </html>
